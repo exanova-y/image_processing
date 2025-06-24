@@ -1,23 +1,32 @@
 from PIL import Image
 import os 
 
+# show parrot image
 img_path = "images/inquiline_kea.jpg"
-
 kea_img = Image.open(img_path)
 kea_img.show()
-kea_grayed = kea_img.convert("L")
-pixels = list(kea_img.getdata())
-print(pixels)
 
+# split the image into rgb channels
+img_channels = []
+r_img, g_img, b_img = kea_img.split()
+img_channels.append(r_img)
+img_channels.append(g_img)
+img_channels.append(b_img)
 
+# for each channel for each pixel, apply thresholding
+new_img_channels = []
 t1 = 50
-# t2 = 50
-# t3 = 100
-# t4 = 32
 
-filtered_pixels_v1 = [pixel if pixel > t1 else 0 for pixel in pixels]
-# compressed_v2 = [n if n > e2 else 0 for n in v]
+for channel in img_channels:
+    pixels = list(channel.getdata()) # needs to be in list format for thresholding operation.
+    print(len(pixels)) 
 
-filtered_image = Image.new("L", image.size) # make empty image of same size (num pixels)
-filtered_image.putdata(filtered_pixels_v1)
-filtered_image.show()
+    filtered_pixel_values = [pixel if pixel > t1 else 0 for pixel in pixels]
+    print(len(filtered_pixel_values))
+
+    filtered_band = Image.new("L", channel.size) # create an empty image of the band
+    filtered_band.putdata((filtered_pixel_values)) # putdata function accepts a tuple
+    new_img_channels.append(filtered_band)
+
+compressed_img = Image.merge("RGB", new_img_channels) # make empty image of same size (num pixels)
+compressed_img.show()
