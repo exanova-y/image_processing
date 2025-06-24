@@ -3,9 +3,17 @@ See how image compression works!
 
 Original image: ![Parrot](images/inquiline_kea.jpg)
 Compressed image example: ![Compressed parrot](images/output.png)
+
 Red channel reduction: 66%   
 Green channel reduction: 53%   
 Blue channel reduction: 30%    
+
+### Process
+1. Split the image into rgb channels
+2. Decide on a threshold `t1`, between 0 - 100. 
+3. For each channel per pixel, discard pixels values lower than threshold `t1`. This means higher thresholds have more pixels thrown away - more compression.
+4. Stack these channels back together into an image
+
 
 ### Prerequisites
 - Python 3.13
@@ -14,7 +22,7 @@ Blue channel reduction: 30%
 ### Getting started
 
 1. Clone this repository and cd into it
-2. If you don't have Pillow, you can create a virtual environment:
+2. If you don't have Pillow, you can create a virtual environment. Example using uv for python package management:
 ```
 uv venv
 source .venv/bin/activate (on mac)
