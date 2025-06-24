@@ -9,24 +9,36 @@ Blue channel reduction: 30%
 
 ### Prerequisites
 - Python 3.13
-- PIL (Pillow) for image processing: `uv pip install Pillow` if you don't have it installed.
+- PIL (Pillow) for image processing.
 
 ### Getting started
 
 1. Clone this repository and cd into it
-2. Run `python3 lossy_compression.py`
+2. If you don't have Pillow, you can create a virtual environment:
+```
+uv venv
+source .venv/bin/activate (on mac)
+uv pip install Pillow
+```
+3. Run `python3 lossy_compression.py`
 
 ## 2. Steganography demo
-
-(not tested)
 
 ### Prerequisites
 - Python 3.13
 - cv2, numpy, matplotlib. 
-You can just install them using `uv pip install cv2 numpy matplotlib`.
+- ipykernel for running jupyter notebooks
 
 ### Getting started
-1. In a new terminal, run `python3 steganography.ipynb`
+1. If you don't have above libraries, you can use
+```
+uv venv
+source .venv/bin/activate (on mac)
+uv pip install notebook cv2 numpy matplotlib 
+```
+2. Open a new terminal and run `jupyter notebook`
+3. Click on this file.
+
 
 ### Process
 1. Convert hidden message into ascii representations and then into binary 
