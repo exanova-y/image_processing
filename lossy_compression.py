@@ -5,7 +5,6 @@ import os
 # show parrot image
 img_path = "images/inquiline_kea.jpg"
 kea_img = Image.open(img_path)
-kea_img.show()
 
 # split the image into rgb channels
 img_channels = []
@@ -16,17 +15,17 @@ img_channels.append(b_img)
 
 # for each channel for each pixel, apply thresholding
 new_img_channels = []
-t1 = 90
+t1 = 80 # you can set this value to be any between 0 to 100
 
 for channel in img_channels:
-    pixels = list(channel.getdata()) # needs to be in list format for thresholding operation.
+    pixels = list(channel.getdata()) 
 
-    filtered_pixel_values = [pixel if pixel > t1 else 0 for pixel in pixels]
+    filtered_pixel_values = [pixel if pixel > t1 else 0 for pixel in pixels] # only keep pixels with value above thresholding
     num_total_pixels = len(filtered_pixel_values)
     num_surviving_pixels = filtered_pixel_values.count(0)
     surviving_ratio = round(num_surviving_pixels/num_total_pixels, 2)
-    reduction_ratio = 1-surviving_ratio
-    print(f"image reduced by {reduction_ratio} among {num_total_pixels} pixels")
+    reduction_ratio = round(1-surviving_ratio, 2)
+    print(f"image reduced by {reduction_ratio*100}% among {num_total_pixels} pixels within this channel.")
 
     filtered_band = Image.new("L", channel.size) # create an empty image of the band
     filtered_band.putdata((filtered_pixel_values)) # putdata function accepts a tuple
