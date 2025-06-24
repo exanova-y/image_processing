@@ -23,6 +23,10 @@ uv pip install Pillow
 3. Run `python3 lossy_compression.py`
 
 ## 2. Steganography demo
+This image contains a message.
+![grayscale-coded-image](images/grayscale-coded-kea.png)
+A closer look at where the message is hidden.
+![grayscale-lsb-plane](images/grayscale-lsb-plane.png) 
 
 ### Prerequisites
 - Python 3.13
